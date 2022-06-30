@@ -31,6 +31,8 @@ public class AEOTPTextField: UITextField {
     public var otpTextColor: UIColor = .black
     /// The default font size of the text
     public var otpFontSize: CGFloat = 14
+
+    public var forceLTR: Bool = false
     /// The default font of the text
     public var otpFont: UIFont = UIFont.systemFont(ofSize: 14)
     /// The delegate of the AEOTPTextFieldDelegate protocol
@@ -101,7 +103,11 @@ private extension AEOTPTextField {
         for _ in 1 ... count {
             let label = createLabel()
             stackView.addArrangedSubview(label)
-            digitLabels.append(label)
+            if forceLTR {
+                digitLabels.insert(label, at: 0)
+            } else {
+                digitLabels.append(label)
+            }
         }
         return stackView
     }
